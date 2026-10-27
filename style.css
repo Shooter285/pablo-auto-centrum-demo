@@ -1,9 +1,3 @@
-/* ==========================================================================
-   Pablo Auto Centrum – wersja demo, odsłona 2
-   Kierunek: strona w klasie marek samochodów. Kinowe zdjęcia, spokojna
-   typografia, dużo powietrza, jeden złoty akcent.
-   ========================================================================== */
-
 :root {
   --bg: #050506;
   --panel: #0c0c0e;
@@ -32,7 +26,7 @@
 @media (min-width: 960px) { :root { --header-h: 84px; } }
 @media (max-width: 959.98px) { :root { --callbar-h: calc(72px + env(safe-area-inset-bottom)); } }
 
-/* ---------- Base ---------- */
+/* Base */
 
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -94,7 +88,7 @@ a:hover { color: var(--gold-2); }
 
 .shell { width: 100%; max-width: calc(var(--shell) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter); }
 
-/* ---------- Type ---------- */
+/* Type */
 
 .display {
   font-family: var(--font-display);
@@ -126,7 +120,7 @@ a:hover { color: var(--gold-2); }
 }
 .text-link:hover { color: var(--gold-2); border-color: var(--gold); }
 
-/* ---------- Pills (akcje) ---------- */
+/* Pills */
 
 .pill {
   display: inline-flex;
@@ -169,7 +163,7 @@ a:hover { color: var(--gold-2); }
 .round-btn:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
 .round-btn:disabled { opacity: 0.3; cursor: default; background: transparent; color: var(--text); border-color: var(--line-strong); }
 
-/* ---------- Demo bar ---------- */
+/* Demo bar */
 
 .demo-bar {
   position: relative; z-index: 60;
@@ -178,7 +172,7 @@ a:hover { color: var(--gold-2); }
   padding: 7px var(--gutter);
 }
 
-/* ---------- Header ---------- */
+/* Header */
 
 .site-header {
   position: sticky; top: 0; z-index: 50;
@@ -266,7 +260,7 @@ a:hover { color: var(--gold-2); }
 }
 @media (min-width: 960px) and (max-width: 1179.98px) { .nav-phones a:last-child { display: none; } }
 
-/* ---------- Hero ---------- */
+/* Hero */
 
 .hero {
   position: relative;
@@ -359,7 +353,6 @@ a:hover { color: var(--gold-2); }
   .scroll-cue span { position: absolute; left: 50%; top: 8px; bottom: 0; width: 1px; background: linear-gradient(var(--gold), rgba(245, 184, 0, 0)); }
 }
 
-/* Wejście: hala zapala światła, potem tekst. Bez pętli. */
 @media (prefers-reduced-motion: no-preference) {
   .hero-media img { animation: hall-lights 1400ms linear 120ms backwards, hero-settle 2800ms var(--ease) backwards; }
   .hero-title .line > span { animation: line-up 1100ms var(--ease) backwards; }
@@ -377,7 +370,7 @@ a:hover { color: var(--gold-2); }
     .hero-media { animation: hero-drift linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
   }
 }
-@keyframes hall-lights { /* świetlówki odpalają z mrugnięciem */
+@keyframes hall-lights {
   0% { filter: brightness(0); }
   14% { filter: brightness(0.5); }
   20% { filter: brightness(0.08); }
@@ -393,7 +386,7 @@ a:hover { color: var(--gold-2); }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes cue { from { transform: scaleY(0); } to { transform: none; } }
 
-/* ---------- Chapters ---------- */
+/* Chapters */
 
 .chapter { position: relative; padding-block: clamp(88px, 12vw, 176px); }
 .chapter--tight { padding-bottom: clamp(72px, 9vw, 128px); }
@@ -404,7 +397,7 @@ a:hover { color: var(--gold-2); }
   .chapter-head:not(.chapter-head--row) { grid-template-columns: 1fr; }
 }
 
-/* ---------- Warsztat: lineup ---------- */
+/* Warsztat */
 
 .lineup-list { border-bottom: 1px solid var(--line); }
 .lineup-item { border-top: 1px solid var(--line); position: relative; }
@@ -456,7 +449,7 @@ a:hover { color: var(--gold-2); }
   .lineup-stage img.is-active { opacity: 1; transform: none; }
 }
 
-/* ---------- Z naszego warsztatu: film ---------- */
+/* Etapy */
 
 .film-track {
   --edge: max(var(--gutter), calc((100vw - var(--shell)) / 2));
@@ -481,9 +474,8 @@ a:hover { color: var(--gold-2); }
 .film-progress { flex: 1; height: 1px; background: var(--line); overflow: hidden; margin-right: 10px; }
 .film-progress span { display: block; height: 100%; background: var(--gold); transform-origin: left; transform: scaleX(var(--progress, 0.17)); transition: transform 500ms var(--ease); }
 
-/* ---------- Pełnokadrowe zdjęcia ---------- */
+/* Zdjęcia */
 
-/* Rozdział ze zdjęciem pokazanym w całości (bez kadrowania) */
 .split { display: grid; gap: clamp(28px, 5vw, 48px); }
 .split-copy { display: grid; gap: 20px; align-content: end; }
 .split-copy p { color: var(--muted); max-width: 42ch; font-size: clamp(1.02rem, 1.3vw, 1.15rem); }
@@ -496,13 +488,12 @@ a:hover { color: var(--gold-2); }
   .split--portrait .split-media { background: transparent; justify-self: end; }
 }
 
-/* zasłona przy wejściu w kadr */
 .js .reveal-media > img { clip-path: inset(14% 0 0 0); transform: scale(1.08); transition: clip-path 1400ms var(--ease), transform 1800ms var(--ease); }
 .js .reveal-media.is-in > img { clip-path: inset(0); transform: none; }
 .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity 900ms var(--ease), transform 1000ms var(--ease); }
 .js .reveal.is-in { opacity: 1; transform: none; }
 
-/* ---------- Myjnia ---------- */
+/* Myjnia */
 
 .wash-body { display: grid; gap: clamp(40px, 6vw, 80px); padding-top: clamp(48px, 7vw, 104px); }
 .wash-side { display: grid; gap: 28px; align-content: start; }
@@ -516,7 +507,6 @@ a:hover { color: var(--gold-2); }
   .wash-side .pill { justify-self: end; }
 }
 
-/* Suwaki przed / po na całą szerokość, jeden pod drugim */
 .compare-grid { display: grid; gap: clamp(40px, 6vw, 88px); }
 .compare figcaption {
   display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px;
@@ -568,7 +558,7 @@ a:hover { color: var(--gold-2); }
   .compare-tag--after { right: 22px; }
 }
 
-/* ---------- Cennik ---------- */
+/* Cennik */
 
 .tabs { position: relative; display: inline-flex; gap: 8px; justify-self: start; border-bottom: 1px solid var(--line); }
 .tab {
@@ -628,7 +618,7 @@ a:hover { color: var(--gold-2); }
 }
 .panel-call p { font-family: var(--font-display); font-weight: 300; font-size: clamp(1.4rem, 2.4vw, 2rem); letter-spacing: -0.01em; }
 
-/* Opony: wybór felgi */
+/* Opony */
 .rim { display: grid; gap: 32px; padding-bottom: clamp(40px, 5vw, 64px); border-bottom: 1px solid var(--line); }
 @media (min-width: 960px) { .rim { grid-template-columns: 1.2fr 1fr; align-items: end; gap: 64px; } }
 .rim-sizes { border: 0; padding: 0; margin: 0; min-width: 0; display: flex; flex-wrap: wrap; gap: 8px; }
@@ -666,7 +656,7 @@ a:hover { color: var(--gold-2); }
 .spec th { text-align: left; font-weight: 400; color: var(--text); }
 .spec td { text-align: right; font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; white-space: nowrap; }
 
-/* ---------- Realizacje ---------- */
+/* Realizacje */
 
 .gallery { display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 168px; grid-auto-flow: dense; gap: 8px; }
 .gallery .g-wide { grid-column: span 2; }
@@ -679,7 +669,7 @@ a:hover { color: var(--gold-2); }
 .gallery-item:hover img { transform: scale(1.04); }
 .gallery-item:hover::after { border-color: var(--gold-line); }
 
-/* ---------- Dlaczego my ---------- */
+/* Dlaczego my */
 
 .why { display: grid; gap: 0; margin-top: clamp(40px, 6vw, 80px); }
 @media (min-width: 760px) { .why { grid-template-columns: 1fr 1fr; column-gap: clamp(40px, 6vw, 112px); } }
@@ -690,7 +680,7 @@ a:hover { color: var(--gold-2); }
 }
 .why p { color: var(--muted); max-width: 44ch; }
 
-/* ---------- Kontakt ---------- */
+/* Kontakt */
 
 .contact { display: grid; gap: 48px; padding-top: clamp(48px, 7vw, 104px); }
 @media (min-width: 960px) { .contact { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(48px, 6vw, 112px); } }
@@ -718,7 +708,7 @@ a:hover { color: var(--gold-2); }
 @media (min-width: 960px) { .contact-map { min-height: 100%; } }
 .contact-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: invert(0.92) hue-rotate(180deg) saturate(0.7) contrast(0.95); }
 
-/* ---------- Formularz ---------- */
+/* Formularz */
 
 .form-layout { display: grid; gap: 48px; }
 @media (min-width: 960px) { .form-layout { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(48px, 6vw, 112px); } .form-intro { position: sticky; top: calc(var(--header-h) + 40px); align-self: start; } }
@@ -762,7 +752,7 @@ a:hover { color: var(--gold-2); }
 @media (max-width: 559.98px) { .pill--submit { justify-self: stretch; } }
 .form-status { padding: 18px 22px; border: 1px solid var(--gold-line); border-radius: 6px; background: #0e0c05; font-weight: 500; }
 
-/* ---------- Footer ---------- */
+/* Footer */
 
 .site-footer { border-top: 1px solid var(--line); padding-top: clamp(56px, 7vw, 96px); color: var(--muted); font-size: 0.95rem; }
 .footer-grid { display: grid; gap: 36px; }
@@ -779,7 +769,7 @@ a:hover { color: var(--gold-2); }
 .footer-bottom > a:not(.text-link):hover { color: var(--text); }
 .footer-bottom p { margin-left: auto; }
 
-/* ---------- Pasek połączeń (telefon) ---------- */
+/* Call bar */
 
 .call-bar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
@@ -798,7 +788,7 @@ a:hover { color: var(--gold-2); }
 .call-bar a:last-child:hover { color: var(--text); }
 @media (min-width: 960px) { .call-bar { display: none; } }
 
-/* ---------- Lightbox ---------- */
+/* Lightbox */
 
 .lightbox { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgba(5, 5, 6, 0.98); color: var(--text); overflow: hidden; }
 .lightbox::backdrop { background: rgba(0, 0, 0, 0.7); }
@@ -820,7 +810,7 @@ a:hover { color: var(--gold-2); }
   .lightbox-img { max-height: calc(100dvh - 150px); max-width: calc(100vw - 240px); }
 }
 
-/* ---------- Toast ---------- */
+/* Toast */
 
 .toast {
   position: fixed; left: 50%; bottom: calc(var(--callbar-h) + 16px); z-index: 70; transform: translateX(-50%);
@@ -829,7 +819,7 @@ a:hover { color: var(--gold-2); }
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* ---------- Ograniczony ruch ---------- */
+/* Reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

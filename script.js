@@ -1,4 +1,3 @@
-/* Pablo Auto Centrum – wersja demo, odsłona 2. Czysty JavaScript, bez bibliotek. */
 (function () {
   "use strict";
 
@@ -9,7 +8,7 @@
   var $ = function (sel, root) { return (root || document).querySelector(sel); };
   var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
 
-  /* ---------- Toast ---------- */
+  // Toast
   var toastEl = $(".toast");
   var toastTimer;
   function toast(message) {
@@ -20,7 +19,7 @@
     toastTimer = setTimeout(function () { toastEl.hidden = true; }, 4200);
   }
 
-  /* ---------- Header: przezroczysty nad zdjęciem, pełny po przewinięciu ---------- */
+  // Header
   var header = $("[data-header]");
   function updateHeader() {
     if (header) header.classList.toggle("is-solid", window.scrollY > 24 || document.body.classList.contains("menu-open"));
@@ -28,7 +27,7 @@
   window.addEventListener("scroll", updateHeader, { passive: true });
   updateHeader();
 
-  /* ---------- Menu (telefon) ---------- */
+  // Menu
   var navToggle = $(".nav-toggle");
   var nav = $("#site-nav");
   var toggleLabel = $("[data-toggle-label]");
@@ -48,7 +47,7 @@
     desktop.addEventListener("change", function (e) { if (e.matches) setNav(false); });
   }
 
-  /* ---------- Aktywna sekcja w menu ---------- */
+  // Aktywny link w menu
   var navLinks = $$('.site-nav li a[href^="#"]');
   if ("IntersectionObserver" in window && navLinks.length) {
     var byId = {};
@@ -63,7 +62,7 @@
     Object.keys(byId).forEach(function (id) { var s = document.getElementById(id); if (s) sectionObserver.observe(s); });
   }
 
-  /* ---------- Godziny: dziś i „teraz otwarte” (czas w Polsce) ---------- */
+  // Godziny otwarcia
   var HOURS = { 1: [8, 20], 2: [8, 20], 3: [8, 20], 4: [8, 20], 5: [8, 20], 6: [8, 14], 0: null };
   function polandNow() {
     try {
@@ -103,7 +102,7 @@
   updateHours();
   setInterval(updateHours, 60000);
 
-  /* ---------- Warsztat: zestawienie usług ze sceną zdjęć ---------- */
+  // Usługi
   var lineup = $("[data-lineup]");
   var activateService = function () {};
   if (lineup) {
@@ -129,7 +128,6 @@
     function onClick(e) { activateService(heads.indexOf(e.currentTarget)); }
     function onHover(e) { activateService(heads.indexOf(e.currentTarget)); }
 
-    // Na komputerze nazwy usług działają jak przyciski; na telefonie wszystko jest widoczne od razu.
     function setMode() {
       heads.forEach(function (h) {
         if (desktop.matches) {
@@ -156,7 +154,7 @@
     a.addEventListener("click", function () { activateService(parseInt(a.getAttribute("data-service-link"), 10)); });
   });
 
-  /* ---------- Z naszego warsztatu: pasek etapów ---------- */
+  // Etapy naprawy
   $$("[data-film]").forEach(function (root) {
     var track = $("[data-film-track]", root);
     var prev = $("[data-film-prev]", root);
@@ -184,7 +182,7 @@
       var start = track.scrollLeft;
       var target = start + dir * step();
       track.scrollTo({ left: target, behavior: reduceMotion ? "auto" : "smooth" });
-      setTimeout(function () { // gdy przeglądarka nie przewinie płynnie, przeskocz
+      setTimeout(function () {
         if (Math.abs(track.scrollLeft - start) < 2) track.scrollTo({ left: target, behavior: "auto" });
         update();
       }, 350);
@@ -197,7 +195,7 @@
     update();
   });
 
-  /* ---------- Suwaki przed / po ---------- */
+  // Przed / po
   $$("[data-compare]").forEach(function (fig) {
     var stage = $(".compare-stage", fig);
     var range = $(".compare-range", fig);
@@ -209,7 +207,7 @@
       range.value = Math.round(v);
       range.setAttribute("aria-valuetext", Math.round(v) + "% zdjęcia przed myciem");
     }
-    function capture(id) { try { stage.setPointerCapture(id); } catch (err) { /* wskaźnik nieaktywny */ } }
+    function capture(id) { try { stage.setPointerCapture(id); } catch (err) {} }
     function fromPointer(e) {
       var rect = stage.getBoundingClientRect();
       set(((e.clientX - rect.left) / rect.width) * 100);
@@ -224,7 +222,6 @@
     stage.addEventListener("pointermove", function (e) {
       if (!dragging) return;
       if (!decided) {
-        // dotyk: ruch poziomy steruje suwakiem, pionowy przewija stronę
         var dx = Math.abs(e.clientX - startX), dy = Math.abs(e.clientY - startY);
         if (dx < 6 && dy < 6) return;
         if (dy > dx) { dragging = false; return; }
@@ -248,7 +245,7 @@
     set(50);
   });
 
-  /* ---------- Cennik: zakładki ---------- */
+  // Zakładki cennika
   var tabs = $$('[role="tab"]');
   var ink = $(".tabs-ink");
   function moveInk(tab) {
@@ -289,7 +286,7 @@
   window.addEventListener("resize", inkToSelected);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(inkToSelected);
 
-  /* ---------- Opony: cena dla wybranej felgi ---------- */
+  // Cena opon
   var rimInputs = $$('input[name="rim"]');
   var rimPrice = $("[data-rim-price]");
   var rimSize = $("[data-rim-size]");
@@ -308,7 +305,7 @@
     });
   });
 
-  /* ---------- Lightbox ---------- */
+  // Lightbox
   var lb = $(".lightbox");
   if (lb && typeof lb.showModal === "function") {
     var lbImg = $(".lightbox-img", lb);
@@ -355,7 +352,7 @@
       if (e.key === "ArrowLeft") { e.preventDefault(); show(index - 1); }
     });
 
-    // przesuwanie palcem
+    // swipe
     var sx = 0, sy = 0, swiping = false, multi = false;
     var fig = $(".lightbox-figure", lb);
     fig.addEventListener("touchstart", function (e) {
@@ -382,7 +379,7 @@
     });
   }
 
-  /* ---------- Formularz (demo) ---------- */
+  // Formularz
   var form = $("#enquiry");
   if (form) {
     var status = $(".form-status", form);
@@ -420,7 +417,7 @@
     });
   }
 
-  /* ---------- Polityka prywatności (zaślepka) ---------- */
+  // Polityka prywatności
   $$("[data-privacy]").forEach(function (a) {
     a.addEventListener("click", function (e) {
       e.preventDefault();
@@ -428,7 +425,7 @@
     });
   });
 
-  /* ---------- Odsłanianie przy przewijaniu ---------- */
+  // Animacje przy przewijaniu
   var revealables = $$(".reveal, .reveal-media");
   if ("IntersectionObserver" in window && !reduceMotion) {
     var io = new IntersectionObserver(function (entries) {
@@ -441,7 +438,7 @@
     revealables.forEach(function (el) { el.classList.add("is-in"); });
   }
 
-  /* ---------- Rok ---------- */
+  // Rok
   var year = $("[data-year]");
   if (year) year.textContent = String(new Date().getFullYear());
 })();
